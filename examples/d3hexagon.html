@@ -1,0 +1,58 @@
+<body>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script type='text/javascript' src='js/Please-compressed.js'></script>
+<script type='text/javascript' src='../src/turtle.js'></script>
+
+<script type='text/javascript'>
+var turtle = new Turtle();
+var points = [
+    [{
+        "x": turtle.setX(225).x,
+        "y": turtle.setY(165).y
+    }, {
+        "x": turtle.lt(180 - 360 / 6).fd(100).x,
+        "y": turtle.y
+    }, {
+        "x": turtle.lt(360 / 6).fd(100).x,
+        "y": turtle.y
+    }, {
+        "x": turtle.lt(360 / 6).fd(100).x,
+        "y": turtle.y
+    }, {
+        "x": turtle.lt(360 / 6).fd(100).x,
+        "y": turtle.y
+    }, {
+        "x": turtle.lt(360 / 6).fd(100).x,
+        "y": turtle.y
+    }]
+];
+
+closedShape = d3.svg.line()
+    .x(function (d) {
+    return d.x;
+})
+    .y(function (d) {
+    return d.y;
+})
+    .interpolate("linear-closed")
+
+
+var svgContainer = d3.select("body")
+    .append("svg")
+    .attr("width", 1000)
+    .attr("height", 1000);
+var linecolor = Please.make_color({
+    base_color: "gold"
+})
+var fillcolor = Please.make_color({
+    base_color: "lawngreen"
+})
+
+svgContainer.append("path")
+    .attr("d", closedShape(points[0]))
+    .attr("stroke", linecolor)
+    .attr("stroke-width", 10)
+    .attr("fill", fillcolor);
+	
+</script>
+</body>
