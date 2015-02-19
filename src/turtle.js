@@ -3,6 +3,7 @@ var Turtle = function () {
     this.x = 0;
     this.y = 0;
     this.rounding = false;
+	this.invert = false;
 }
 
 Turtle.prototype.setX = function (val) {
@@ -20,24 +21,35 @@ Turtle.prototype.setDegree = function (deg) {
     return this;
 }
 
+Turtle.prototype.setInvert = function (bool) {
+	this.invert = bool;
+	return this;
+}
+
 Turtle.prototype.setRounding = function (bool) {
     this.rounding = bool;
     return this;
 }
 
 Turtle.prototype.rt = function (degrees) {
-    this.d -= degrees;
+    if (this.invert) {
+	    this.d += degrees;
+	} else {
+	    this.d -= degrees;
+	    this.d += 360; // to ensure that the number is positive
+	}
     this.d %= 360;
-    this.d += 360;
-    this.d %= 360; // to ensure that the number is positive
     return this;
 }
 
 Turtle.prototype.lt = function (degrees) {
-    this.d += degrees;
+    if (this.invert) {
+	    this.d -= degrees;
+	    this.d += 360; // to ensure that the number is positive
+	} else {
+	    this.d += degrees;
+	}
     this.d %= 360;
-    this.d += 360;
-    this.d %= 360; // to ensure that the number is positive
     return this;
 }
 Turtle.prototype.adj = function (degrees, hyp) {
